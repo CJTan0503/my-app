@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomePageModule) },
   { path: 'addItem', loadChildren: () => import('./addItem/addItem.module').then(m => m.AddItemPageModule) },
   { path: 'edit-delete-item', loadChildren: () => import('./edit-delete-item/edit-delete-item.module').then(m => m.EditDeleteItemPageModule) },
-  { path: 'edit-item', loadChildren: () => import('./edit-item/edit-item.module').then(m => m.EditItemPageModule) }
+  { path: 'edit-item/:id', loadChildren: () => import('./edit-item/edit-item.module').then(m => m.EditItemPageModule) }
 ];
 
 
