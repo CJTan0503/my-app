@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="color: white;">
+      Login
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="floating" style="color: white;">Username</ion-label>
+    <ion-input style="color: white" type="text" [(ngModel)]="username"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label style="color: white;" position="floating">Password</ion-label>
+    <ion-input style="color: white" type="password" [(ngModel)]="password"></ion-input>
+  </ion-item>
+  <ion-button expand="block" (click)="login()">Login</ion-button>
+  <p style="color: white;">Don't have an account? <a routerLink="/register">Register here</a></p>
+  <p style="color: white;">Forgot your password? <a routerLink="/recover">Recover it here</a></p>
+  <p style="color: white;">{{ loginError }}</p> <!-- Display login error message -->
+</ion-content>
+
+
+

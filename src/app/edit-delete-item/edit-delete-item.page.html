@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="color: white;">
+      Edit/Delete Item
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToHomePage()"><i id="home-icon" class="bi bi-house-door"></i></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="floating">Search by Name</ion-label>
+    <ion-input [(ngModel)]="searchName" name="searchName"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Category</ion-label>
+    <ion-select [(ngModel)]="searchCategory" name="searchCategory">
+      <ion-select-option value="">All Categories</ion-select-option>
+      <ion-select-option value="accessories">Accessories</ion-select-option>
+      <ion-select-option value="water bottle">Water Bottle</ion-select-option>
+      <ion-select-option value="clothes">Clothes</ion-select-option>
+      <ion-select-option value="electronics">Electronics</ion-select-option>
+      <ion-select-option value="wallet">Wallet</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-button expand="full" (click)="searchItems()">Search</ion-button>
+
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      <ion-label>
+        <h2>{{ item.name }}</h2>
+        <p>Type: {{ item.type }}</p>
+        <p>Description: {{ item.description }}</p>
+        <p>Location: {{ item.location }}</p>
+        <p>Time: {{ item.time }}</p>
+        <p>Recorder: {{ item.recorder }}</p>
+      </ion-label>
+      <ion-button (click)="editItem(item.ID)" fill="outline" slot="end">Edit</ion-button>
+      <ion-button (click)="deleteItem(item.ID)" color="danger" fill="outline" slot="end">Delete</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

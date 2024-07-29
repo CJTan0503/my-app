@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit Item</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="submitForm()">
+    <ion-item>
+      <ion-label position="floating">ID</ion-label>
+      <ion-input [(ngModel)]="item.id" name="id" readonly></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input [(ngModel)]="item.name" name="name" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Type</ion-label>
+      <ion-select [(ngModel)]="item.type" name="type" required>
+        <ion-select-option value="accessories">Accessories</ion-select-option>
+        <ion-select-option value="water bottle">Water Bottle</ion-select-option>
+        <ion-select-option value="clothes">Clothes</ion-select-option>
+        <ion-select-option value="electronics">Electronics</ion-select-option>
+        <ion-select-option value="wallet">Wallet</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-textarea [(ngModel)]="item.description" name="description"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Location Found</ion-label>
+      <ion-input [(ngModel)]="item.location" name="location" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Time Found</ion-label>
+      <ion-datetime [(ngModel)]="item.time" name="time" required></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Recorder</ion-label>
+      <ion-input [(ngModel)]="item.recorder" name="recorder" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Photo</ion-label>
+      <input type="file" (change)="onFileChange($event)" />
+    </ion-item>
+
+    <ion-button expand="full" type="submit">Update Item</ion-button>
+  </form>
+</ion-content>

@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="color: white;">
+      Add Item
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToHomePage()"><i id="home-icon" class="bi bi-house-door"></i></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="submitForm()">
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input [(ngModel)]="item.name" name="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Type</ion-label>
+      <ion-select [(ngModel)]="item.type" name="type">
+        <ion-select-option value="accessories">Accessories</ion-select-option>
+        <ion-select-option value="water bottle">Water Bottle</ion-select-option>
+        <ion-select-option value="clothes">Clothes</ion-select-option>
+        <ion-select-option value="electronics">Electronics</ion-select-option>
+        <ion-select-option value="wallet">Wallet</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-textarea [(ngModel)]="item.description" name="description"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Location</ion-label>
+      <ion-input [(ngModel)]="item.location" name="location"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Time Found</ion-label>
+      <ion-datetime [(ngModel)]="item.time" name="time"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Recorder's Name</ion-label>
+      <ion-input [(ngModel)]="item.recorder" name="recorder"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Photo</ion-label>
+      <input type="file" (change)="onFileChange($event)" />
+    </ion-item>
+    <ion-button expand="full" type="submit">Submit</ion-button>
+  </form>
+</ion-content>

@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="color: white;">
+      Lost & Found
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToProfile()"><i id="profile-icon" class="bi bi-person-circle"></i></ion-button>
+      <ion-button (click)="logout()"><i id="logout-icon" class="bi bi-box-arrow-right"></i></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="greetings">
+    <h4 style="color: white;">Welcome</h4>
+    <h1 style="color: white;">{{ username }}</h1>
+  </div>
+
+  <ion-item>
+    <ion-searchbar [(ngModel)]="searchCategory" (ionInput)="filterItems()" placeholder="Search by Item Name"></ion-searchbar>
+    <ion-select [(ngModel)]="selectedCategory" (ionChange)="filterItems()" placeholder="Select Category">
+      <ion-select-option value="">All</ion-select-option>
+      <ion-select-option value="accessories">Accessories</ion-select-option>
+      <ion-select-option value="water_bottle">Water Bottle</ion-select-option>
+      <ion-select-option value="clothes">Clothes</ion-select-option>
+      <ion-select-option value="electronics">Electronics</ion-select-option>
+      <ion-select-option value="wallet">Wallet</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <div class="button-row">
+    <ion-button class="menu-button" expand="block" (click)="addItem()">
+      <img src="assets/icon/addTransaction.png">
+      <ion-label style="color: white;">Add Item</ion-label>
+    </ion-button>
+    <ion-button class="menu-button" expand="block" (click)="editDeleteItem()">
+      <img src="assets/icon/editDelete.png">
+      <ion-label style="color: white;">Edit/Delete Item</ion-label>
+    </ion-button>
+  </div>
+
+  <div class="expenses-header">
+    <h5 style="color: white;">List of Items</h5>
+    <ion-button class="refresh-button" (click)="refreshItems()"><img class="refresh-icon" src="assets/icon/refresh.png"></ion-button>
+  </div>
+
+  <ion-spinner *ngIf="loading"></ion-spinner>
+
+  <ng-container *ngIf="!loading && filteredItemsByMonth">
+    <ng-container *ngFor="let month of filteredItemsByMonth | keyvalue">
+      <ion-list style="background-color: black;">
+        <ion-item-divider>
+          <ion-label>{{ month.key }}</ion-label>
+        </ion-item-divider>
+        <ion-item *ngFor="let item of month.value">
+          <ion-label>
+            <p style="color: white;">Name: {{ item.name }}</p>
+            <p style="color: white;">Type: {{ item.type }}</p>
+            <p style="color: white;">Description: {{ item.description }}</p>
+            <p style="color: white;">Location: {{ item.location }}</p>
+            <p style="color: white;">Date Found: {{ item.time | date: 'mediumDate' }}</p>
+            <p style="color: white;">Recorder: {{ item.recorder }}</p>
+            <img [src]="item.photo_path" alt="Item Photo" style="width: 100px; height: auto;">
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label style="color: white;"><strong>Total Items: {{ getTotalItems(month.value) }}</strong></ion-label>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+  </ng-container>
+
+  <ion-item *ngIf="!loading && items.length === 0">
+    <ion-label style="color: white;">
+      No items recorded yet.
+    </ion-label>
+  </ion-item>
+</ion-content>

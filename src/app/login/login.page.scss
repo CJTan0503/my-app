@@ -1,0 +1,19 @@
+.gray-text{
+    color: #f0f0f0;
+  }
+  
+  ion-item {
+    --background: #212121; /* Background color for ion-item */
+    --ion-color-base: #303030; /* Base color for ion-item */
+  }
+  ion-input::part(native)::-webkit-input-placeholder {
+    color: #000000; /* Dark color for placeholder */
+  }
+  
+  ion-input::part(native):-moz-placeholder {
+    color: #000000; /* Dark color for placeholder */
+  }
+  
+  ion-input::part(native)::placeholder {
+    color: #000000; /* Dark color for placeholder */
+  }
