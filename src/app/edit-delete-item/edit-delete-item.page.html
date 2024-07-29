@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title style="color: white;">
-      Edit/Delete Item
+      Delete Item
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="goToHomePage()"><i id="home-icon" class="bi bi-house-door"></i></ion-button>
@@ -37,7 +37,6 @@
         <p>Time: {{ item.time }}</p>
         <p>Recorder: {{ item.recorder }}</p>
       </ion-label>
-      <ion-button (click)="editItem(item.ID)" fill="outline" slot="end">Edit</ion-button>
       <ion-button (click)="deleteItem(item.ID)" color="danger" fill="outline" slot="end">Delete</ion-button>
     </ion-item>
   </ion-list>

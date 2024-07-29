@@ -64,18 +64,21 @@ export class HomePage implements OnInit {
   }
 
   getItems(userId: number) {
-    this.loading = true; // Set loading indicator
+    this.loading = true;
     this.http.get<any[]>(`http://localhost/server/get-item.php?user_id=${userId}`)
       .subscribe(
         (response: any[]) => {
-          this.items = response;
-          this.itemsByMonth = this.groupItemsByMonth(response);
+          this.items = response.map(item => ({
+            ...item,
+            photo: item.photo ? `data:image/jpeg;base64,${item.photo}` : null
+          }));
+          this.itemsByMonth = this.groupItemsByMonth(this.items);
           this.filteredItemsByMonth = this.itemsByMonth;
-          this.loading = false; // Update loading indicator
+          this.loading = false;
         },
         (error) => {
           console.error('Error fetching items:', error);
-          this.loading = false; // Update loading indicator even on error
+          this.loading = false;
         }
       );
   }
