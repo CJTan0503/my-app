@@ -1,3 +1,4 @@
+<!-- home.page.html -->
 <ion-header>
   <ion-toolbar>
     <ion-title style="color: white;">
@@ -14,6 +15,20 @@
   <div class="greetings">
     <h4 style="color: white;">Welcome</h4>
     <h1 style="color: white;">{{ username }}</h1>
+  </div>
+
+  <div class="current-time">
+    <h4 style="color: white;">Current Time and Date</h4>
+    <p style="color: white;">{{ currentTime }}</p>
+  </div>
+
+  <div id="weather" *ngIf="weather" style="color: white;">
+    <h2>Current Weather</h2>
+    <p>Temperature: {{ weather.temperature }}°C</p>
+    <p>Condition: {{ weather.condition }}</p>
+  </div>
+  <div id="weather" *ngIf="!weather" style="color: white;">
+    <p>Unable to retrieve weather data.</p>
   </div>
 
   <ion-item>

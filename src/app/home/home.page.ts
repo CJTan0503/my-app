@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
+declare var moment: any;
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -15,6 +17,8 @@ export class HomePage implements OnInit {
   searchCategory: string = ''; // Search category by item name
   selectedCategory: string = ''; // Selected category for filtering
   filteredItemsByMonth: { [key: string]: any[] } = {};
+  currentTime: string = '';
+  weather: any = null;
 
   constructor(
     private router: Router,
@@ -24,6 +28,8 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.getUsername();
+    this.updateCurrentTime();
+    this.getLocationAndWeather();
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -73,7 +79,6 @@ export class HomePage implements OnInit {
         }
       );
   }
-  
 
   groupItemsByMonth(items: any[]): { [key: string]: any[] } {
     const grouped: { [key: string]: any[] } = {};
@@ -134,5 +139,48 @@ export class HomePage implements OnInit {
   logout() {
     localStorage.removeItem('userId');
     this.router.navigate(['/login']);
+  }
+
+  updateCurrentTime() {
+    this.currentTime = moment().format('LLLL');
+  }
+
+  getLocationAndWeather() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          this.getWeather(position.coords.latitude, position.coords.longitude);
+        },
+        (error) => {
+          console.error('Error getting location:', error);
+        }
+      );
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+    }
+  }
+
+  getWeather(lat: number, lon: number) {
+    const apiKey = 'be1777d48d0c0bd17ae791468b7e1e80';
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+    this.http.get(url)
+      .subscribe(
+        (data: any) => {
+          console.log('Weather API response:', data); // Log the API response
+          if (data && data.main) {
+            this.weather = {
+              temperature: data.main.temp,
+              condition: data.weather[0].description
+            };
+          } else {
+            this.weather = null;
+          }
+        },
+        (error) => {
+          console.error('Error fetching weather:', error);
+          this.weather = null;
+        }
+      );
   }
 }
