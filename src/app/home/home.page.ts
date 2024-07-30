@@ -81,7 +81,7 @@ export class HomePage implements OnInit {
           this.loading = false;
         }
       );
-  }
+  }  
 
   groupItemsByMonth(items: any[]): { [key: string]: any[] } {
     const grouped: { [key: string]: any[] } = {};

@@ -43,7 +43,7 @@ export class AddItemPage implements OnInit {
       formData.append('photo', this.photoFile, this.photoFile.name);
     }
   
-    this.http.post('http://localhost/server/add-item.php', formData, { responseType: 'json' })
+    this.http.post('http://localhost/server/add-item.php', formData)
       .subscribe(
         (response: any) => {
           console.log('Item added successfully:', response);
@@ -53,8 +53,6 @@ export class AddItemPage implements OnInit {
           console.error('Error adding item:', error);
         }
       );
-  
-  
   }
 
   goToHomePage() {
